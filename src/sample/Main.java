@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.Objects.Person;
+import sample.interfaces.impls.CollectionAddressBook;
 
 import java.awt.*;
 
@@ -19,8 +21,14 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
         Button add = new Button();
-
+testData();
     }
+    private void testData(){
+        CollectionAddressBook addressBook = new CollectionAddressBook();
+        addressBook.fillTestData();
+        addressBook.print();
+    }
+
 
 
     public static void main(String[] args) {
