@@ -5,21 +5,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
+import sample.Objects.Person;
+import sample.interfaces.impls.CollectionAddressBook;
 
-import javax.swing.*;
-import javax.swing.text.TableView;
+import javafx.scene.control.TableView;
 import java.io.IOException;
 
 public class MainController {
 
+    CollectionAddressBook collectionAddressBook = new CollectionAddressBook();
     @FXML
     private Button changeButton;
     @FXML
@@ -31,13 +31,28 @@ public class MainController {
     @FXML
     private TextField inputTextView;
     @FXML
-    private TableView tableView;
+    public TableView addrTableView;
     @FXML
-    private TableColumn fioColumn;
+    private TableColumn<Person, String> collumnFio;
     @FXML
-    private TableColumn telColumn;
+    private TableColumn<Person,String> collumnPhone;
     @FXML
     private Label label;
+
+    @FXML
+    private void initialize(){
+        collumnFio.setCellValueFactory(new PropertyValueFactory<Person,String>("fio"));
+        collumnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
+
+        collectionAddressBook.fillTestData();
+        addrTableView.setItems(collectionAddressBook.getPersonList());
+        updateCountLabel();
+
+    }
+private void updateCountLabel(){
+        label.setText("Количество записей: " + collectionAddressBook.getPersonList().size());
+}
+
 
 
 
